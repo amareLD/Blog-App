@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  background-color: black;
+
 }
 
 .ball {
@@ -16,5 +16,5 @@
   border-radius: 50%;
   background-color: white;
   position: absolute;
-  left: 1px;
+
 }
