@@ -1,3 +1,5 @@
+'use client';
+
 // import React from 'react';
 // import styles from './authLinks.module.css';
 // import { Link } from 'next/link'; // Correct import with curly braces
@@ -18,11 +20,12 @@
 
 // export default AuthLinks;
 
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './authLinks.module.css';
-import  Link  from 'next/link'; // Correct import with curly braces
+import Link from 'next/link'; // Correct import with curly braces
 
 const AuthLinks = () => {
+  const [open, setOpen] = useState(false);
   // temporary
   const status = 'notauthenticated';
   return (
@@ -34,6 +37,26 @@ const AuthLinks = () => {
           <Link href="/write">Write</Link>
           <span className={styles.link}>Logout</span>
         </>
+      )}
+      <div className={styles.burger} onClick={() => setOpen(!open)}>
+        <div className={styles.line}></div>
+        <div className={styles.line}></div>
+        <div className={styles.line}></div>
+      </div>
+      {open && (
+        <div className={styles.responsiveMenu}>
+          <Link href="/">Homepage</Link>
+          <Link href="/">About</Link>
+          <Link href="/">Contact</Link>
+          {status === 'notauthenticated' ? (
+            <Link href="/login">Login</Link>
+          ) : (
+            <>
+              <Link href="/write">Write</Link>
+              <span className={styles.link}>Logout</span>
+            </>
+          )}
+        </div>
       )}
     </>
   );
