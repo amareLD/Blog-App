@@ -1,4 +1,5 @@
- .container{
+.container {
   flex: 2;
-  background-color: aqua;
- }
+  background-color: blue
+   ;
+}
