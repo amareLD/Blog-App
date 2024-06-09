@@ -5,7 +5,10 @@
   height: 100px;
 }
 
+
+
 .social {
+
   display: flex;
   gap: 10px;
   flex: 1;
@@ -19,6 +22,7 @@
 }
 
 .links {
+  
   display: flex;
   align-items: center;
   gap: 20px;

@@ -1,21 +1,30 @@
 .container {
   margin-bottom: 50px;
+  
   display: flex;
   align-items: center;
+  /* background-color: blue; */
+  border-radius: 24px;
   gap: 50px;
+  box-shadow: 4px 4px 4px 0px rgba(138, 136, 136, 0.75);
 }
 
 .imageContainer {
+  
   flex: 1;
   height: 350px;
   position: relative;
+  
 }
 
 .image {
+  padding: 2px;
   object-fit: cover;
+  border-radius: 24px;
 }
 
 .textContainer {
+  padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;

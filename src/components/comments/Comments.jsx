@@ -9,22 +9,20 @@ import { useState } from "react";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
-
-  const data = await res.json();
-
   if (!res.ok) {
-    const error = new Error(data.message);
+    const error = new Error('An error occurred while fetching the data.');
+    error.info = await res.json();
+    error.status = res.status;
     throw error;
   }
-
-  return data;
+  return res.json();
 };
 
 const Comments = ({ postSlug }) => {
   const { status } = useSession();
 
-  const { data, mutate, isLoading } = useSWR(
-    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
+  const { data, mutate, error } = useSWR(
+    `/api/comments/${postSlug}`,
     fetcher
   );
 
@@ -33,6 +31,9 @@ const Comments = ({ postSlug }) => {
   const handleSubmit = async () => {
     await fetch("/api/comments", {
       method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ desc, postSlug }),
     });
     mutate();
@@ -56,28 +57,31 @@ const Comments = ({ postSlug }) => {
         <Link href="/login">Login to write a comment</Link>
       )}
       <div className={styles.comments}>
-        {isLoading
-          ? "loading"
-          : data?.map((item) => (
-              <div className={styles.comment} key={item._id}>
-                <div className={styles.user}>
-                  {item?.user?.image && (
-                    <Image
-                      src={item.user.image}
-                      alt=""
-                      width={50}
-                      height={50}
-                      className={styles.image}
-                    />
-                  )}
-                  <div className={styles.userInfo}>
-                    <span className={styles.username}>{item.user.name}</span>
-                    <span className={styles.date}>{item.createdAt}</span>
-                  </div>
+        {error && <div>Error loading comments: {error.message}</div>}
+        {!data ? (
+          "loading"
+        ) : (
+          data.map((item) => (
+            <div className={styles.comment} key={item.id}>
+              <div className={styles.user}>
+                {item?.user?.image && (
+                  <Image
+                    src={item.user.image}
+                    alt=""
+                    width={50}
+                    height={50}
+                    className={styles.image}
+                  />
+                )}
+                <div className={styles.userInfo}>
+                  <span className={styles.username}>{item.user.name}</span>
+                  <span className={styles.date}>{new Date(item.createdAt).toLocaleString()}</span>
                 </div>
-                <p className={styles.desc}>{item.desc}</p>
               </div>
-            ))}
+              <p className={styles.desc}>{item.desc}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
