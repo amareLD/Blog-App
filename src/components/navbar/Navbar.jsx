@@ -9,9 +9,51 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.social}>
-        <Image src="/facebook.png" alt="facebook" width={24} height={24} className="img" />
-        <Image src="/instagram.png" alt="instagram" width={24} height={24} />
-        <Image src="/tiktok.png" alt="tiktok" width={24} height={24} />
+
+        <Link href="https://web.facebook.com/profile.php?id=100008853782648">
+          <div className="relative   group ">
+            <Image
+              src="/facebook.png"
+              alt=""
+              width={24}
+              height={24}
+              className="transition duration-300 ease-in-out transform group-hover:scale-150"
+            />
+          </div>
+        </Link>
+        <Link href="https://lahirudarshana.medium.com/">
+          <div className="relative   group ">
+            <Image
+              src="/medium.png"
+              alt=""
+              width={24}
+              height={24}
+              className="transition duration-300 ease-in-out transform group-hover:scale-150 "
+            />
+          </div>
+        </Link>
+        <Link href="https://www.instagram.com/lahiru_____d/">
+          <div className="relative   group ">
+            <Image
+              src="/instagram.png"
+              alt=""
+              width={24}
+              height={24}
+              className="transition duration-300 ease-in-out transform group-hover:scale-150"
+            />
+          </div>
+        </Link>
+        <Link href="https://www.tiktok.com/@lahiru_d">
+          <div className="relative   group ">
+            <Image
+              src="/tiktok.png"
+              alt=""
+              width={24}
+              height={24}
+              className="transition duration-300 ease-in-out transform group-hover:scale-150"
+            />
+          </div>
+        </Link>
         <Image src="/youtube.png" alt="youtube" width={24} height={24} />
       </div>
       <div className={styles.logo}>lamablog</div>
